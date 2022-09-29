@@ -28,10 +28,10 @@ export class Conversation {
     cascade: ['insert', 'remove', 'update'],
   })
   @JoinColumn()
-  message: Message[];
+  messages: Message[];
 
-  @Column({ name: 'createAt' })
-  createAt: number;
+  @Column({ name: 'created_at' })
+  createdAt: number;
 
   @OneToOne(() => Message)
   @JoinColumn({ name: 'last_message_sent' })

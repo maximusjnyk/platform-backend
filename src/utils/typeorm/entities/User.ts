@@ -28,5 +28,5 @@ export class User {
 
   @OneToMany(() => Message, (message) => message.author)
   @JoinColumn()
-  message: Message[];
+  messages: Message[];
 }

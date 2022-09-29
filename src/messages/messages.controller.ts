@@ -1,15 +1,14 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { Routes, Services } from '../utils/constants';
-import { IMessageService } from './message';
-import { CreateMessageDto } from './dto/create-message.dto';
 import { AuthUser } from '../utils/decorators';
 import { User } from '../utils/typeorm';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { IMessageService } from './message';
 
 @Controller(Routes.MESSAGES)
-export class MessagesController {
+export class MessageController {
   constructor(
-    @Inject(Services.MESSAGES)
-    private readonly messagesService: IMessageService,
+    @Inject(Services.MESSAGES) private readonly messageService: IMessageService,
   ) {}
 
   @Post()
@@ -17,7 +16,6 @@ export class MessagesController {
     @AuthUser() user: User,
     @Body() createMessageDto: CreateMessageDto,
   ) {
-    console.log(createMessageDto);
-    return this.messagesService.createMessage({ ...createMessageDto, user });
+    return this.messageService.createMessage({ ...createMessageDto, user });
   }
 }

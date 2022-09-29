@@ -36,7 +36,7 @@ export type CreateParticipantParams = {
   id: number;
 };
 
-export type CreateMessageParam = {
+export type CreateMessageParams = {
   content: string;
   conversationId: number;
   user: User;
