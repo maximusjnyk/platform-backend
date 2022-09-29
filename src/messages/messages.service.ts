@@ -33,11 +33,16 @@ export class MessageService implements IMessageService {
       throw new HttpException('Cannot Create Message', HttpStatus.FORBIDDEN);
     conversation.creator = instanceToPlain(conversation.creator) as User;
     conversation.recipient = instanceToPlain(conversation.recipient) as User;
+
     const newMessage = this.messageRepository.create({
       content,
       conversation,
       author: instanceToPlain(user),
     });
-    return this.messageRepository.save(newMessage);
+    conversation.lastMessageSent = await this.messageRepository.save(
+      newMessage,
+    );
+    await this.conversationRepository.save(conversation);
+    return;
   }
 }
